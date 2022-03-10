@@ -6,13 +6,15 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:17:46 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/03/10 03:22:50 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/03/10 13:25:19 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putchar(char c)
+int	ft_putchar(char c, int cc)
 {
 	write(1, &c, 1);
+	cc++;
+	return (cc);
 }

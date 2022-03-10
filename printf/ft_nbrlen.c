@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putint.c                                        :+:      :+:    :+:   */
+/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 12:31:03 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/03/10 15:04:42 by bcarreir         ###   ########.fr       */
+/*   Created: 2022/03/10 13:29:39 by bcarreir          #+#    #+#             */
+/*   Updated: 2022/03/10 14:57:07 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-#include <stdio.h>
-
-int	ft_putint(int n, int cc)
+int ft_nbrlen(long n, int base)
 {
-	long	nb;
-
-	nb = n;
-	cc += ft_nbrlen(n, 10);
-	if (nb < 0)
+	int	len;
+	len = 1;
+	if (n == -4294967296)
+		return (11);
+	if (n < 0)
 	{
-		nb = -nb;
-		ft_putchar('-', cc);
+		n = -n;
+		len++;
 	}
-	if (nb >= 10)
+	while (n >= base)
 	{
-		ft_putint(nb / 10, cc);
-		ft_putchar("0123456789"[nb % 10], cc);
+		len++;
+		n /= base;
 	}
-	else
-		ft_putchar("0123456789"[nb % 10], cc);
-	return (cc);
+	return (len);
 }
-
-/* int main(void)
-{
-	// ft_putint(4589, 2);
-	printf("\n%d", ft_putint(4589, 2));
-} */

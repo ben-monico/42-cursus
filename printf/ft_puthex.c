@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:16:40 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/03/10 03:27:34 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/03/10 15:42:12 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,11 @@
 #include<stdlib.h>
 #include "libftprintf.h"
 
-static size_t ft_nblen(long n)
-{
-	size_t	len;
-	len = 1;
-	if (n < 0)
-	{
-		n = -n;
-		len++;
-	}
-	while (n >= 16)
-	{
-		len++;
-		n /= 16;
-	}
-	return (len);
-}
-
 static char *ft_createstr(long n, size_t len)
 {
 	char *s;
 	
-	s = (char *)malloc(sizeof(char) * (ft_nblen(n) + 1));
+	s = (char *)malloc(sizeof(char) * (ft_nbrlen(n, 16) + 1));
 	if (!s)
 		return NULL;
 	if (n < 0)
@@ -55,18 +38,17 @@ static char *ft_createstr(long n, size_t len)
 	s[len] = "0123456789abcdef"[n % 16];
 	return (s);
 }
-int *ft_itohex(size_t n, int *cc, char c)
+int ft_itohex(size_t n, char c, int cc)
 {
 	size_t	len;
 	char 	*s;
 	int		i;
 
-	len = ft_nblen(n);
+	len = ft_nbrlen(n, 16);
 	s = ft_createstr(n, len);
 	i = 0;
-	cc += strlen(s);
 	if (c == 'x')	
-		ft_putstr(s);
+		cc += ft_putstr(s, cc);
 	else if (c == 'X')
 	{
 		while (s[i])
@@ -74,17 +56,15 @@ int *ft_itohex(size_t n, int *cc, char c)
 			s[i] = ft_toupper(s[i]);
 			i++;
 		}
-		ft_putstr(s);
+		cc += ft_putstr(s, cc);
 	}
-	int g = *cc;
-	ft_putint(g);
 	return (cc);
 }
 
-int main(void)
+/* int main(void)
 {
 	int c = 13;
 
-	ft_itohex(15, &c, 'X');
-	printf("\n%x", 15);
-}
+	printf("\norig: %X", 15);
+	printf("\nreturn: %d", ft_itohex(15, 'X', c));
+} */

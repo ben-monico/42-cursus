@@ -6,22 +6,24 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:23:54 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/03/10 03:23:18 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/03/10 13:39:39 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include <stdio.h>
 
-void	ft_putstr(char *s)
+int	ft_putstr(char *s, int cc)
 {
 	int	i;
 
 	i = 0;
 	if (!s)
-		return ;
+		return (0);
 	while (s[i])
 	{
-		ft_putchar(s[i]);
+		cc = ft_putchar(s[i], cc);
 		i++;
 	}
+	return (cc);
 }
