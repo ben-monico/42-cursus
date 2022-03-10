@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putint.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:31:03 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/03/09 18:45:14 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/03/10 03:22:08 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_putint(int n)
 {
 	long	trans;
 
@@ -20,15 +20,15 @@ void	ft_putnbr_fd(int n, int fd)
 	if (trans < 0)
 	{
 		trans = -trans;
-		ft_putchar_fd('-', fd);
+		ft_putchar('-');
 	}
 	if (trans >= 10)
 	{
-		ft_putnbr_fd(trans / 10, fd);
-		ft_putchar_fd("0123456789"[trans % 10], fd);
+		ft_putint(trans / 10);
+		ft_putchar("0123456789"[trans % 10]);
 	}
 	else
-		ft_putchar_fd("0123456789"[trans % 10], fd);
+		ft_putchar("0123456789"[trans % 10]);
 }
 
 /* int main(void)
