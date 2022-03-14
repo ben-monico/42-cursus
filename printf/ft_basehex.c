@@ -1,41 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putint.c                                        :+:      :+:    :+:   */
+/*   ft_basehex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 12:31:03 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/03/10 15:04:42 by bcarreir         ###   ########.fr       */
+/*   Created: 2022/01/25 15:16:40 by bcarreir          #+#    #+#             */
+/*   Updated: 2022/03/14 18:21:45 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <stdio.h>
 
-int	ft_putint(int n, int cc)
-{
-	long	nb;
+static int	ft_convert(unsigned int long n, char *s)
+{	
+	int	cc;
 
-	nb = n;
-	cc += ft_nbrlen(n, 10);
-	if (nb < 0)
+	cc = 0;
+	if (n >= 16)
 	{
-		nb = -nb;
-		ft_putchar('-', cc);
-	}
-	if (nb >= 10)
-	{
-		ft_putint(nb / 10, cc);
-		ft_putchar("0123456789"[nb % 10], cc);
+		cc += ft_convert(n / 16, s);
+		cc += ft_convert(n % 16, s);
 	}
 	else
-		ft_putchar("0123456789"[nb % 10], cc);
+		cc += ft_putchar(s[n % 16]);
 	return (cc);
 }
 
-/* int main(void)
+int	ft_puthex(unsigned int n, char c)
 {
-	// ft_putint(4589, 2);
-	printf("\n%d", ft_putint(4589, 2));
-} */
+	int	cc;
+
+	if (c == 'x')
+		cc = ft_convert(n, "0123456789abcdef");
+	else
+		cc = ft_convert(n, "0123456789ABCDEF");
+	return (cc);
+}
+
+int	ft_putptr(unsigned int long uil)
+{
+	int	cc;
+
+	cc = ft_convert(uil, "0123456789abcdef");
+	return (cc);
+}

@@ -1,7 +1,9 @@
-NAME = libft.a
+NAME = libftprintf.a
 
-SRCS = 		ft_putnbr_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putchar_fd.c 
-
+SRCS = 		 	ft_printf.c\
+				ft_alphanum.c\
+				ft_basehex.c
+				
 OBJS =	$(SRCS:.c=.o) 
 
 CC = gcc
@@ -24,4 +26,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
