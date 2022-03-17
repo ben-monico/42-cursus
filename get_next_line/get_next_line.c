@@ -6,7 +6,7 @@
 /*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:17:52 by benmonico         #+#    #+#             */
-/*   Updated: 2022/03/17 16:58:17 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/03/17 17:24:51 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,28 +79,6 @@ char	**ft_split(char const *s, char c)
 	return (a);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*str;
-	int		i;
-	int		c;
-
-	c = 0;
-	while (s1[c])
-		c++;
-	i = 0;
-	while (s2[i])
-		i++;
-	str = ft_calloc((i + c + 1), sizeof(char));
-	i = 0;	
-	while (*s1)
-		str[i++] = (char)*s1++;
-	while (*s2)
-		str[i++] = (char)*s2++;
-	str[i] = '\0';
-	return (str);
-}
-
 int	checknull(char *buffer, unsigned long buffersize)
 {
 	unsigned long	i;
@@ -137,6 +115,7 @@ char *get_next_line(int fd)
 				break;
 		}
 		newlines = ft_split(str, '\n');
+		free (str);
 	}
 	newlines++;
 	return (*newlines);

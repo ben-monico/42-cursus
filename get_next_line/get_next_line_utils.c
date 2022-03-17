@@ -6,7 +6,7 @@
 /*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:08:18 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/03/17 17:00:42 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/03/17 17:01:47 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,3 +73,24 @@ void	*ft_memset(void *b, int c, size_t len)
 	return (b);
 }
 
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*str;
+	int		i;
+	int		c;
+
+	c = 0;
+	while (s1[c])
+		c++;
+	i = 0;
+	while (s2[i])
+		i++;
+	str = ft_calloc((i + c + 1), sizeof(char));
+	i = 0;	
+	while (*s1)
+		str[i++] = (char)*s1++;
+	while (*s2)
+		str[i++] = (char)*s2++;
+	str[i] = '\0';
+	return (str);
+}
