@@ -6,83 +6,117 @@
 /*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:17:52 by benmonico         #+#    #+#             */
-/*   Updated: 2022/03/19 18:04:59 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/03/17 22:29:29 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+static int	ft_wordcount(char const *s, char c)
 {
-	char	*substr;
-	unsigned int		c;
+	int	wc;
 
-	c = 0;
-	while (s[c])
-		c++;
-	if (!s)
+	wc = 0;
+	while (*s)
+	{
+		if (*s == c)
+			wc++;
+		s++;
+	}
+	wc++;
+	return (wc);
+}
+
+static void	*ft_dealmem(char **a, int j, char const *str, char c)
+{
+	char	**b;
+	int		cc;
+
+	b = a;
+	cc = 0;
+	while (*str && *str != c)
+	{
+		str++;
+		cc++;
+	}
+	b[j] = (char *)malloc(sizeof(char) * (cc + 2));
+	if (!b[j])
+	{
+		while (j--)
+			free(b[j]);
+		free(b);
 		return (NULL);
-	if (start >= c)
-		return (ft_strdup(""));
-	if (c < len)
-		len = c;
-	substr = (char *)malloc(sizeof(char) * (len + 1));
-	if (substr == NULL)
+	}
+	return (0);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**a;
+	int		j;
+	int		k;
+	int		wc;
+
+	wc = ft_wordcount(s, c);
+	a = (char **)malloc(sizeof(char *) * (wc + 2));
+	if (!a)
 		return (NULL);
-	ft_strlcpy(substr, (char *)&s[start], len + 1);
-	return (substr);
+	j = 1;
+	while (j != wc + 1)
+	{
+		ft_dealmem(a, j, s, c);
+		k = 0;
+		while (*s && c != *s)
+			a[j][k++] = (char)*s++;
+		if (*s && c == *s)
+			s++;
+		if (j < wc)
+			a[j][k] = '\n';
+		a[j][k + 1] = '\0';
+		j++;
+	}
+	a[j] = NULL;
+	return (a);
+}
+
+int	checknull(char *buffer, unsigned long buffersize)
+{
+	unsigned long	i;
+
+	i = 0;
+	while (buffer[i] != '\0' && i < buffersize)
+		i++;
+	if (buffer[i] == '\0' && i < buffersize)
+		return(1);
+	return (0);
 }
 
 char *get_next_line(int fd)
 {
+	static char	**newlines;
 	char		buffer[BUFFER_SIZE + 1];
-	static char	*str;
-	static char	*aux;	
-	int			ret;
-	static int	k;
-	static int	i;
+	char		*str;
+	char		*aux;	
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || (k > 0 && str == NULL))
+	if (BUFFER_SIZE == 0 || fd < 0 || (newlines && *newlines == NULL))
 		return (NULL);
-	if (str && k > 0 && str[k] == '\0')
-	{
-		free (str);
-		str = NULL;
-		return (NULL);
-	}
-	if (str == NULL && k == 0)
+	if (newlines == NULL)
 	{
 		str = ft_calloc(1, sizeof(char));
 		while (1)
 		{
-			if (aux)
-				free (aux);
 			ft_memset(buffer, 0, BUFFER_SIZE + 1);
-			ret = read(fd, buffer, BUFFER_SIZE);
-			if (ret == -1)
-			{
-				free (str);
-				return (NULL);
-			}
+			read(fd, buffer, BUFFER_SIZE);
 			aux = ft_strdup(str);
-			free (str);
 			str = ft_strjoin(aux, buffer);
-			if (ret == 0)
+			if (checknull(buffer, BUFFER_SIZE) == 1)
 				break;
 		}
+		newlines = ft_split(str, '\n');
+		free (str);
 	}
-	free (aux);
-	if (k == 0)
-		i = 0;
-	else if (str[k + 1])
-	{
-		k++;
-		i = k;
-	}
-	while (str[k] && (str[k] != '\n' || str[k] != '\0') )
-		k++;
-	aux = ft_substr(str, i, k - i + 1);
-	return (aux);
+	newlines++;
+	return (*newlines);
 }
 
 // #include <fcntl.h>

@@ -6,7 +6,7 @@
 /*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:08:18 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/03/17 17:01:47 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/03/19 16:23:18 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
 	int		i;
+	int		j;
 	int		c;
 
 	c = 0;
@@ -86,9 +87,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[i])
 		i++;
 	str = ft_calloc((i + c + 1), sizeof(char));
-	i = 0;	
-	while (*s1)
-		str[i++] = (char)*s1++;
+	i = 0;
+	j = 0;
+	while (s1[j])
+		str[i++] = s1[j++];
 	while (*s2)
 		str[i++] = (char)*s2++;
 	str[i] = '\0';
