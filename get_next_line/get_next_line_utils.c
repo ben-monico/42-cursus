@@ -6,7 +6,7 @@
 /*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:08:18 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/03/19 16:23:18 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/03/20 19:04:07 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,19 @@
 char	*ft_strdup(const char *s)
 {
 	char	*dup;
-	int	c;
 
-	c = 0;
-	while (s[c])
-		c++;
-	dup = (char *)malloc(sizeof(*s) * (c + 1));
+	dup = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (dup == NULL)
 		return (0);
-	ft_strlcpy(dup, s, (c + 1));
+	ft_strlcpy(dup, s, (ft_strlen(s) + 1));
 	return (dup);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	unsigned int	i;
-	unsigned int	c;
 
 	i = 0;
-	c = 0;
-	while (src[c])
-		c++;
 	if (size > 0)
 	{
 		while (src[i] && i + 1 < size)
@@ -45,7 +37,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 		}
 		dst[i] = '\0';
 	}
-	return (c);
+	return (ft_strlen(src));
 }
 
 void	*ft_calloc(size_t count, size_t size)
@@ -78,15 +70,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*str;
 	int		i;
 	int		j;
-	int		c;
 
-	c = 0;
-	while (s1[c])
-		c++;
 	i = 0;
 	while (s2[i])
 		i++;
-	str = ft_calloc((i + c + 1), sizeof(char));
+	str = (char *)ft_calloc((i + ft_strlen(s1) + 1), sizeof(char));
 	i = 0;
 	j = 0;
 	while (s1[j])

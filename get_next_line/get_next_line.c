@@ -6,26 +6,32 @@
 /*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:17:52 by benmonico         #+#    #+#             */
-/*   Updated: 2022/03/19 18:04:59 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/03/20 19:04:34 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+size_t	ft_strlen(const char *s)
 {
-	char	*substr;
-	unsigned int		c;
+	int	c;
 
 	c = 0;
 	while (s[c])
 		c++;
+	return (c);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*substr;
+
 	if (!s)
 		return (NULL);
-	if (start >= c)
+	if (start >= ft_strlen(s))
 		return (ft_strdup(""));
-	if (c < len)
-		len = c;
+	if (ft_strlen(s) < len)
+		len = ft_strlen(s);
 	substr = (char *)malloc(sizeof(char) * (len + 1));
 	if (substr == NULL)
 		return (NULL);
@@ -44,72 +50,53 @@ char *get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || (k > 0 && str == NULL))
 		return (NULL);
-	if (str && k > 0 && str[k] == '\0')
-	{
-		free (str);
-		str = NULL;
+	if (k > 0 && str[k] == '\0')
 		return (NULL);
-	}
 	if (str == NULL && k == 0)
 	{
-		str = ft_calloc(1, sizeof(char));
+		str = (char *)ft_calloc(1, sizeof(char));
 		while (1)
 		{
 			if (aux)
 				free (aux);
 			ft_memset(buffer, 0, BUFFER_SIZE + 1);
 			ret = read(fd, buffer, BUFFER_SIZE);
-			if (ret == -1)
+			if (ret == -1 || (!*str && ret == 0))
 			{
 				free (str);
-				return (NULL);
+				return (str = NULL);
 			}
 			aux = ft_strdup(str);
+			if (str && ret == 0)
+				break;
 			free (str);
 			str = ft_strjoin(aux, buffer);
-			if (ret == 0)
-				break;
 		}
 	}
-	free (aux);
-	if (k == 0)
-		i = 0;
-	else if (str[k + 1])
-	{
-		k++;
-		i = k;
-	}
-	while (str[k] && (str[k] != '\n' || str[k] != '\0') )
+	free(aux);
+	i = k;
+	while (str[k] && str[k] != '\n')
 		k++;
 	aux = ft_substr(str, i, k - i + 1);
+	if (str[k])
+		k++;
+	else
+		free (str);
 	return (aux);
 }
 
-// #include <fcntl.h>
-// int main(void)
-// {
-// 	int fd = open("/Users/benmonico/Desktop/Github/get_next_line/hello.txt", O_RDONLY);
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));	
-// 	printf("%s", get_next_line(fd));	
-// 	printf("%s", get_next_line(fd));	
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));	
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
+#include <fcntl.h>
+int main(void)
+{
+	int fd = open("/Users/benmonico/Desktop/Github/get_next_line/hello.txt", O_RDONLY);
+	int ret = 0;
 	
+	while (ret < 3 )
+	{
+		printf("%s", get_next_line(fd));
+		ret++;
+	}
+
 	
 // 	// get_next_line(fd);
-
-// }
+}
