@@ -6,7 +6,7 @@
 /*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:17:52 by benmonico         #+#    #+#             */
-/*   Updated: 2022/03/22 02:42:44 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/03/22 16:29:36 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ size_t	ft_strlen(const char *s)
 
 char *get_next_line(int fd)
 {
-	char		buffer[BUFFER_SIZE + 1];
+	char	buffer[BUFFER_SIZE + 1];
 	char	*line;
 	char	*str;
 	static char *aux;
@@ -55,14 +55,18 @@ char *get_next_line(int fd)
 		line = ft_strdup(str);
 		free(str);
 	}
-	ft_memset(buffer, 0, BUFFER_SIZE + 1);
 	ret = 1;
 	while (ret > 0)
 	{
+		ft_memset(buffer, 0, BUFFER_SIZE + 1);
 		ret = read(fd, buffer, BUFFER_SIZE);
-		if (ret == -1 || ret == 0)
-			return (NULL);
 		str = ft_strjoin(line, buffer);
+		free(line);
+		if (ret == -1 || (!*str && ret == 0))
+		{
+			free(str);
+			return (NULL);
+		}
 		i = 0;
 		while (str[i] && str[i] != '\n')
 			i++;
@@ -85,6 +89,14 @@ char *get_next_line(int fd)
 // 	int fd = open("/Users/benmonico/Desktop/Github/get_next_line/hello.txt", O_RDONLY);
 // 	// int ret = 0;
 	
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
 // 	printf("%s", get_next_line(fd));
 // 	printf("%s", get_next_line(fd));
 
