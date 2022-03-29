@@ -1,42 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 19:08:18 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/03/28 16:40:51 by bcarreir         ###   ########.fr       */
+/*   Created: 2022/03/14 19:25:57 by bcarreir          #+#    #+#             */
+/*   Updated: 2022/03/28 16:40:49 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
 
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\n')
-			return (i + 1);
-		i++;
-	}
-	return (i);
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
 
-size_t	ft_strcpy(char *line, char *aux)
-{
-	int	i;
+# endif
 
-	i = 0;
-	while (aux[i])
-	{
-		line[i] = aux[i];
-		i++;
-	}
-	return (i);
-}
+char	*get_next_line(int fd);
+int		ft_checknlc(char *buffer);
+size_t	ft_strlen(const char *str);
+size_t	ft_strcpy(char *line, char *aux);
+void	ft_update(char *buff);
+char	*ft_get_line(char *line, char *buff);
+
+#endif
