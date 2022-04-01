@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:57:03 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/01 18:07:24 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/01 18:34:37 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ typedef struct s_stack
 	int			size;
 }	t_stack;
 
+typedef struct s_pushswap
+{
+	t_stack *a; //ps->a->head->nb
+	t_stack *b;
+}				t_shupswap;
+
 typedef struct s_array {
 	int	*array;
 	int  size;
@@ -37,14 +43,14 @@ typedef struct s_array {
 	int  max;
 } t_arrray;
 
-typedef struct s_pushswap
-{
-	t_stack *a; //ps->a->head->nb
-	t_stack *b;
-}				t_ps;
 
 t_list	*ft_find_head(t_list *ptr);
 t_list	*ft_find_tail(t_list *ptr);
+void	ft_swap(t_list *head);
+void	ft_push(t_list *head, t_stack *otherstack);
+void	ft_rotation(t_list *head);
+void	ft_rev_rotation(t_list *tail);
+
 
 
 #endif
