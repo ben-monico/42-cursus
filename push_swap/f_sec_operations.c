@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 18:27:14 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/01 18:34:50 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/04 14:30:59 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_sa()
 {
 	t_list *ahead;
 
-	ahead = t_shupswap->a->head;
+	ahead = t_ps->a->head;
 	ft_swap(ahead);
 }
 

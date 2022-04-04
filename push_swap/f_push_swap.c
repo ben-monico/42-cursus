@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   f_push_swap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:10:26 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/01 18:21:50 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/04 18:42:26 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
-t_stack *initstack(int size)
+int main(int argc, char **argv)
 {
-	t_stack *stack;
+	t_ps	pushswap;
 
-	stack = malloc(sizeof(t_stack));
-	stack->head = NULL;
-	stack->tail = NULL;
-	stack->size = size;
-	return (stack);
-}
-
-
-
-
-
-int main()
-{
-	int c;
+	if (argc == 1 || !(pushswap.a = ft_parse_args(argc, argv)))
+	{
+		ft_putstr("Error\n");
+		return ;
+	}
+	
+	/* int c;
 	int i = -1;
 	int arr[] = {3, 4, 0, 6, 2, 1 , 90, 89, 27, 10};
 
@@ -54,7 +46,7 @@ int main()
 	head = ft_find_head(tmp);
 	printf("Tmp point to nb (%d)\n", tmp->nb);
 	printf("Tmp2 point to nb (%d)\n", tmp2->nb);
-	printf("head nb = (%d)\n", head->nb);
+	printf("head nb = (%d)\n", head->nb); */
 	
 
 }
