@@ -3,34 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   f_utils_libft.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:26:44 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/05 03:55:36 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/04/05 18:55:47 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi_adp(char *str, int *valid_arg)
+long	ft_atoi(const char *str)
 {
+	long	result;
 	int	sign;
-	int	result;
+	int	i;
 
+	i = 0;
 	result = 0;
 	sign = 1;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '+' || *str == '-')
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	if (str[i] == '+' || str[i] == '-')
 	{
-		if (*str == '-')
+		if (str[i] == '-')
 			sign *= -1;
-		str++;
+		i++;
 	}
-	while ((*str >= '0' && *str <= '9') && *str != '\0')
+	while ((str[i] >= '0' && str[i] <= '9') && str[i] != '\0')
 	{
-		result = (result * 10) + *str - '0';
-		str++;
+		result = (result * 10) + str[i] - '0';
+		i++;
 	}
 	result *= sign;
 	return (result);
@@ -48,4 +50,12 @@ void	ft_putstr(char *s)
 		write (1, &s[i], 1);
 		i++;
 	}
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	else
+		return (0);
 }

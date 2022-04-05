@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_push_swap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:10:26 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/05 03:54:43 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/04/05 17:28:40 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@ int main(int argc, char **argv)
 
 	pushswap.a = initstack(0);
 	if (!pushswap.a)
-		return (NULL);
+	{
+		ft_putstr("initstackError\n");
+		return (0);
+	}	
 	if (argc == 1 || !(pushswap.a->head = ft_parse_args(argc, argv)))
 	{
-		ft_putstr("Error\n");
-		return ;
+		ft_putstr("parseargError\n");
+		return (0);
 	}
 	
 	/* int c;

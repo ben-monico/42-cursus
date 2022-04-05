@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_utils_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 18:20:35 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/05 03:54:01 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/04/05 17:36:45 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,19 @@ t_node	*ft_find_tail(t_node *ptr)
 		ptr = ptr->next;
 	}
 	return (ptr);
+}
+
+void	ft_lstclear(t_node **lst)
+{
+	t_node	*aux;
+
+	if (!lst)
+		return ;
+	while (*lst)
+	{
+		aux = (*lst)->next;
+		free(*lst);
+		*lst = aux;
+	}
+	*lst = NULL;
 }

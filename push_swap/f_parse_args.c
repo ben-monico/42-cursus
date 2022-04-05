@@ -3,93 +3,132 @@
 /*                                                        :::      ::::::::   */
 /*   f_parse_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:12:28 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/05 04:12:35 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/04/05 18:58:25 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_stack	*ft_parse_args(int argc, char **argv) //split args into list & checks for errors
+//review situations longer and smaller than max int
+t_node	*ft_parse_args(int argc, char **argv) 
 {
-	t_stack *a_stack;
-	int	i;
+	t_node *a_head;
 
-	a_stack = ft_split_to_stack(argc, argv);
-	if (!a_stack)
+	a_head = ft_split_to_stack(argc, argv);
+	if (!a_head)
 		return (NULL);
-	if (ft_error_check(a_stack))
+	if (ft_dup_check(a_head))
+	{
+		ft_lstclear(&a_head);
 		return (NULL);
-
+	}
+	return (a_head);
 }
 
 t_node *ft_split_to_stack(int argc, char **argv)
 {
-	t_node	*tmp;
-	t_node	*tmp2;
+	t_node	*node;
+	t_node	*head;
 	char	**str;
 	int		i;
-	int		j;
 
-	tmp2 = NULL;
 	str = NULL;
 	i = 1;
-	while (i <= argc)
+	while (i < argc)
 	{
-		str = ft_split(*argv[i]);
-		while (*str[j++])
+		str = ft_split(argv[i], ' ');
+		if (!str)
+			return (NULL);
+		if (!ft_strvalid(str))
 		{
-			initnode(*str[j]);
-			if (tmp2)
-				tmp2->next = tmp;
-			tmp->prev = tmp2;
-			tmp2 = tmp;
+			ft_free(str);
+			return (NULL);
 		}
+		node = ft_atoiton(str);
+		if (!node)
+			return (NULL);
 		ft_free(str);
 		i++;
+	}
+	head = ft_find_head(node);
+	return (head);
+}
+
+int	ft_strvalid(char **str)
+{
+	int	j;
+	int	i;
+
+	j = 0;
+	while (str[j])
+	{
+		i = 0;
+		if (str[j][0] == '+' || str[j][0] == '-')
+			i++;
+		while (str[j][i])
+		{
+			if (!ft_isdigit(str[j][i]))
+				return (0);
+			i++;
+		}
+		j++;
+	}
+	return (1);
+}
+
+t_node *ft_atoiton(char **str)
+{
+	t_node	*tmp;
+	static t_node	*tmp2;
+	long	res;
+	int	j;
+
+	j = 0;
+	while (str[j])
+	{
+		res = ft_atoi(str[j]);
+		if (res > 2147483647 || res < -2147483648)
+			return (NULL);
+		tmp = initnode(res);
+		if (tmp2)
+			tmp2->next = tmp;
+		tmp->prev = tmp2;
+		tmp2 = tmp;
+		j++;
 	}
 	return (tmp);
 }
 
-char	**ft_split(char **argv)
-{
-
-}
-
 void	ft_free(char **str)
 {
-	while(*str)
+	int	j;
+
+	j = 0;
+	while(str[j])
 	{
-		free(*str);
-		*str++;
+		free(str[j]);
+		j++;
 	}
 	free(str);
 	return ;
 }
 
-int	ft_error_check(t_stack *a_stack)
+int	ft_dup_check(t_node *ptr)
 {
-	/* 	int	ac;
+	t_node	*aux;
 
-		ac = 1;
-	while (ac < argc)
+	while (ptr != NULL)
 	{
-		if (ft_atoi(*argv[ac]) > 2147483647 || ft_atoi(*argv[ac]) < -2147483648)
-			return (1);
-		i = 0;
-		while (argv[ac][i])
+		aux = ptr->next;
+		while (aux != NULL)
 		{
-			if ()
-		}
-		i = ac + 1;
-		while (ac < argc)
-		{
-			if (ft_atoi(*argv[ac]) == ft_atoi(*argv[i]))
+			if (aux->nb == ptr->nb)
 				return (1);
-			i++;
+			aux = aux->next;
 		}
-	} */
+		ptr = ptr->next;
+	}
 	return (0);
 }
