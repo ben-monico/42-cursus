@@ -3,22 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   f_utils_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 18:20:35 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/04 19:04:48 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/05 03:54:01 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack *stack_a(void)
+t_stack *initstack(int size)
 {
-	static t_stack stack;
+	t_stack *stack;
 
-	return (&stack);
+	stack = malloc(sizeof(t_stack));
+	if (!stack)
+		return (NULL);
+	stack->head = NULL;
+	stack->tail = NULL;
+	stack->size = size;
+	return (stack);
 }
-
 
 t_node *initnode(int i)
 {
@@ -53,9 +58,4 @@ t_node	*ft_find_tail(t_node *ptr)
 		ptr = ptr->next;
 	}
 	return (ptr);
-}
-
-void lst_addtail(t_node *ptr, t_stack *stack)
-{
-	ptr = ft_find_tail();
 }

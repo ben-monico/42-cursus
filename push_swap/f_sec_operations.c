@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sec_operations.c                                   :+:      :+:    :+:   */
+/*   f_sec_operations.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 18:27:14 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/04 14:30:59 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/05 00:20:30 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sa()
+void	ft_sa(t_stack *a_stack)
 {
-	t_list *ahead;
+	t_node *a_head;
 
-	ahead = t_ps->a->head;
-	ft_swap(ahead);
+	a_head = a_stack->head;
+	ft_swap(a_head);
 }
 
 // sa (swap a): Swap the first 2 elements at the top of stack a.

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_push_swap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:10:26 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/04 18:42:26 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/05 03:54:43 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ int main(int argc, char **argv)
 {
 	t_ps	pushswap;
 
-	if (argc == 1 || !(pushswap.a = ft_parse_args(argc, argv)))
+	pushswap.a = initstack(0);
+	if (!pushswap.a)
+		return (NULL);
+	if (argc == 1 || !(pushswap.a->head = ft_parse_args(argc, argv)))
 	{
 		ft_putstr("Error\n");
 		return ;
@@ -28,9 +31,9 @@ int main(int argc, char **argv)
 
 
 
-	t_list *head;
-	t_list *tmp;
-	t_list *tmp2;
+	t_node *head;
+	t_node *tmp;
+	t_node *tmp2;
 	
 	c = 10;
 	tmp2 = NULL;

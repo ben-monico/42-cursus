@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_parse_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:12:28 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/04 18:42:26 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/05 04:12:35 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,53 @@ t_stack	*ft_parse_args(int argc, char **argv) //split args into list & checks fo
 
 }
 
-t_stack *ft_split_to_stack(int argc, char **argv)
+t_node *ft_split_to_stack(int argc, char **argv)
 {
-	//t_stack *a_stack;
+	t_node	*tmp;
+	t_node	*tmp2;
+	char	**str;
 	int		i;
-	int		valid_arg;
+	int		j;
 
-	//a_stack = initstack(0);
-	if (!a_stack)
-		return (NULL);
+	tmp2 = NULL;
+	str = NULL;
 	i = 1;
-	
 	while (i <= argc)
 	{
-		valid_arg = 1;
-		initnode(ft_atoi_adp(argv[i], &valid_arg));
-		argv[i]
+		str = ft_split(*argv[i]);
+		while (*str[j++])
+		{
+			initnode(*str[j]);
+			if (tmp2)
+				tmp2->next = tmp;
+			tmp->prev = tmp2;
+			tmp2 = tmp;
+		}
+		ft_free(str);
+		i++;
 	}
-	return (stack_a());
+	return (tmp);
+}
+
+char	**ft_split(char **argv)
+{
+
+}
+
+void	ft_free(char **str)
+{
+	while(*str)
+	{
+		free(*str);
+		*str++;
+	}
+	free(str);
+	return ;
 }
 
 int	ft_error_check(t_stack *a_stack)
 {
-		int	ac;
+	/* 	int	ac;
 
 		ac = 1;
 	while (ac < argc)
@@ -66,6 +90,6 @@ int	ft_error_check(t_stack *a_stack)
 				return (1);
 			i++;
 		}
-	}
+	} */
 	return (0);
 }

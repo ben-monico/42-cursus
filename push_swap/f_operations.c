@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.c                                       :+:      :+:    :+:   */
+/*   f_operations.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:41:14 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/01 18:24:44 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/04 23:59:44 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_swap(t_list *head)
+void	ft_swap(t_node *head)
 {
-	t_list *aux;
+	t_node *aux;
 
 	if (!head || head->next == NULL)
 		return;
@@ -22,15 +22,15 @@ void	ft_swap(t_list *head)
 	head = head->next;
 	head->next = aux;
 }
-void	ft_push(t_list *head, t_stack *otherstack)
+void	ft_push(t_node *head, t_stack *otherstack)
 {
 	head->next = otherstack->head;
 }
 
-void	ft_rotation(t_list *head)
+void	ft_rotation(t_node *head)
 {
-	t_list *aux;
-	t_list *tail;
+	t_node *aux;
+	t_node *tail;
 
 	tail = ft_find_tail(head);
 	aux = head;
@@ -38,10 +38,10 @@ void	ft_rotation(t_list *head)
 	tail = aux;
 }
 
-void	ft_rev_rotation(t_list *tail)
+void	ft_rev_rotation(t_node *tail)
 {
-	t_list *aux;
-	t_list *head;
+	t_node *aux;
+	t_node *head;
 
 	head = ft_find_head(tail);
 	aux = tail;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_utils_libft.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:26:44 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/04 18:59:09 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/05 03:55:36 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	ft_atoi_adp(char *str, int *valid_arg)
 		result = (result * 10) + *str - '0';
 		str++;
 	}
-	if (*str && !((*str >= 9 && *str <= 13) || *str == 32)))
-		*valid_arg = 0;
 	result *= sign;
 	return (result);
 }
