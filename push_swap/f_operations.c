@@ -3,50 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   f_operations.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:41:14 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/04 23:59:44 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/04/06 16:41:04 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_swap(t_node *head)
+void	ft_swap(t_node *node)
 {
 	t_node *aux;
 
-	if (!head || head->next == NULL)
+	if (!node || node->next == NULL)
+		return ;
+	aux = node;
+	node->nb = node->next->nb;
+	node->next->nb = aux->nb;
+}
+
+void	ft_push(t_stack *stack, t_stack *stackaux)
+{
+	t_node *aux;
+
+	if (!stack->head)
 		return;
-	aux = head;
-	head = head->next;
-	head->next = aux;
-}
-void	ft_push(t_node *head, t_stack *otherstack)
-{
-	head->next = otherstack->head;
+	aux = stack->head->next;
+	stack->head->next = stackaux->head;
+	stackaux->head = stack->head;
+	stack->head = aux;
 }
 
-void	ft_rotation(t_node *head)
+void	ft_rotation(t_stack *stack)
 {
 	t_node *aux;
-	t_node *tail;
 
-	tail = ft_find_tail(head);
-	aux = head;
-	head = tail;
-	tail = aux;
+	aux = stack->head->next;
+	stack->tail->next = stack->head;
+	stack->head->next = NULL;
+	stack->head = aux;
+	stack->tail = stack->tail->next;
 }
 
-void	ft_rev_rotation(t_node *tail)
+void	ft_rev_rotation(t_stack *stack)
 {
 	t_node *aux;
-	t_node *head;
 
-	head = ft_find_head(tail);
-	aux = tail;
-	tail = head;
-	head = aux;
+	aux = stack->tail->prev;
+	stack->tail->next = stack->head;
+	stack->head = stack->tail;
+	aux->next = NULL;
+	stack->tail = aux;
 }
 
 // sa (swap a): Swap the first 2 elements at the top of stack a.

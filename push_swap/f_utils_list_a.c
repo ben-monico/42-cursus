@@ -6,13 +6,13 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 18:20:35 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/05 17:36:45 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/06 14:17:38 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack *initstack(int size)
+t_stack *ft_initstack(int size)
 {
 	t_stack *stack;
 
@@ -25,7 +25,7 @@ t_stack *initstack(int size)
 	return (stack);
 }
 
-t_node *initnode(int i)
+t_node *ft_initnode(int i)
 {
 	t_node *new;
 

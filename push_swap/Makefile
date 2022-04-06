@@ -1,10 +1,10 @@
 NAME = push_swap.a
 
-SRCS = 	*.c
+SRCS = 	$(wildcard *.c)
 
 OBJS =	$(SRCS:.c=.o)
 
-CC = gcc
+CC = gcc 
 
 CFLAGS = -Wall -Werror -Wextra
 

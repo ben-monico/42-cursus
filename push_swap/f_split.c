@@ -6,11 +6,37 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:07:52 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/05 18:40:05 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/06 17:02:14 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+t_node *ft_split_to_stack(int argc, char **argv)
+{
+	t_node	*node;
+	t_node	*head;
+	char	**str;
+	int		i;
+
+	str = NULL;
+	i = 1;
+	while (i < argc)
+	{
+		str = ft_split(argv[i], ' ');
+		if (!str)
+			return (NULL);
+		if (!ft_strvalid(str) && ft_free(str))
+			return (NULL);
+		node = ft_atoiton(str);
+		if (!node)
+			return (NULL);
+		ft_free(str);
+		i++;
+	}
+	head = ft_find_head(node);
+	return (head);
+}
 
 static int	ft_wordcount(char const *s, char c)
 {

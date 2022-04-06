@@ -6,53 +6,53 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:10:26 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/05 17:28:40 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/06 19:21:09 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int	ft_checksort(t_stack *stack)
+{
+	t_node *ptr;
+
+	ptr = stack->head;
+	while (ptr->next != NULL)
+	{
+		if (ptr->nb > ptr->next->nb)
+			return (0);
+		ptr = ptr->next;
+	}
+	return (1);
+}
+
+void	ft_algorithm(t_stack *a_stack, t_stack *b_stack)
+{
+	b_stack->size = 0;
+	if (ft_checksort(a_stack))
+	{
+		ft_putstr("Sorted baby\n");
+		return ;
+	}
+}
+
 int main(int argc, char **argv)
 {
-	t_ps	pushswap;
+	t_ps	ps;
 
-	pushswap.a = initstack(0);
-	if (!pushswap.a)
+	if (!(ps.a = ft_initstack(0)) || !(ps.b = ft_initstack(0)))
 	{
-		ft_putstr("initstackError\n");
+		ft_putstr("Stack Error\n");
 		return (0);
 	}	
-	if (argc == 1 || !(pushswap.a->head = ft_parse_args(argc, argv)))
+	if (argc == 1 || !(ps.a->head = ft_parse_args(argc, argv)))
 	{
-		ft_putstr("parseargError\n");
+		ft_putstr("Parsing Error\n");
+		free(ps.a);
+		free(ps.b);
 		return (0);
 	}
-	
-	/* int c;
-	int i = -1;
-	int arr[] = {3, 4, 0, 6, 2, 1 , 90, 89, 27, 10};
-
-
-
-	t_node *head;
-	t_node *tmp;
-	t_node *tmp2;
-	
-	c = 10;
-	tmp2 = NULL;
-	while(++i < c)
-	{
-		tmp = initnode(arr[i]);
-		if (tmp2 != NULL)
-			tmp2->next = tmp;
-		tmp->prev = tmp2;
-		printf("cpy:%d \n", tmp->nb);
-		tmp2 = tmp;
-	}
-	head = ft_find_head(tmp);
-	printf("Tmp point to nb (%d)\n", tmp->nb);
-	printf("Tmp2 point to nb (%d)\n", tmp2->nb);
-	printf("head nb = (%d)\n", head->nb); */
-	
-
+	ft_algorithm(ps.a, ps.b);
+	ft_printlist(ps.a);
+ 	// system("leaks -- a.out");
 }

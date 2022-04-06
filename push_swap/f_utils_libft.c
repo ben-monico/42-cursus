@@ -6,11 +6,57 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:26:44 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/05 18:55:47 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/06 17:10:27 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	ft_putstr(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i])
+	{
+		write (1, &s[i], 1);
+		i++;
+	}
+}
+
+void	ft_putnbr(int n)
+{
+	long	trans;
+
+	trans = n;
+	if (trans < 0)
+	{
+		trans = -trans;
+		ft_putchar('-');
+	}
+	if (trans >= 10)
+	{
+		ft_putnbr(trans / 10);
+		ft_putchar("0123456789"[trans % 10]);
+	}
+	else
+		ft_putchar("0123456789"[trans % 10]);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	else
+		return (0);
+}
 
 long	ft_atoi(const char *str)
 {
@@ -36,26 +82,4 @@ long	ft_atoi(const char *str)
 	}
 	result *= sign;
 	return (result);
-}
-
-void	ft_putstr(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return ;
-	while (s[i])
-	{
-		write (1, &s[i], 1);
-		i++;
-	}
-}
-
-int	ft_isdigit(int c)
-{
-	if (c >= 48 && c <= 57)
-		return (1);
-	else
-		return (0);
 }
