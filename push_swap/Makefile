@@ -1,20 +1,22 @@
-NAME = push_swap.a
+NAME = push_swap
 
 SRCS = 	$(wildcard *.c)
 
 OBJS =	$(SRCS:.c=.o)
+
+INCLUDES = -I .
 
 CC = gcc 
 
 CFLAGS = -Wall -Werror -Wextra
 
 .c.o:
-	$(CC) -c $(CFLAGS) $< -o $(<:.c=.o)
+	$(CC) $(INCLUDES) -c $(CFLAGS) $< -o $(<:.c=.o)
 
 all: $(NAME)
 
 $(NAME):	$(OBJS) 
-	@ar rcs $(NAME) $(OBJS) 
+	$(CC) $(INCLUDES) $(OBJS) -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)
@@ -24,7 +26,4 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(OBJS)
-	@ar rc $(NAME) $(OBJS)
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

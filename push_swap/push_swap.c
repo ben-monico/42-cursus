@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_push_swap.c                                      :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:10:26 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/07 21:14:43 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/04/08 16:13:02 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_checksort(t_stack *stack)
-{
-	t_node *ptr;
-
-	ptr = stack->head;
-	while (ptr->next != NULL)
-	{
-		if (ptr->nb > ptr->next->nb)
-			return (0);
-		ptr = ptr->next;
-	}
-	return (1);
-}
-
 void	ft_algorithm(t_stack *astk, t_stack *bstk)
 {
-	bstk->size = 0;
+	astk->tail = ft_find_tail(astk->head);
+	ft_putstr("| Init stack a and b |\n");
 	ft_printlist(astk, bstk);
 	if (ft_checksort(astk))
 	{
@@ -36,6 +23,12 @@ void	ft_algorithm(t_stack *astk, t_stack *bstk)
 		return ;
 	}
 	ft_sa(astk);
+	ft_printlist(astk, bstk);
+	ft_pb(astk, bstk);
+	ft_printlist(astk, bstk);
+	ft_ra(astk);
+	ft_printlist(astk, bstk);
+	ft_rra(astk);
 	ft_printlist(astk, bstk);
 }
 

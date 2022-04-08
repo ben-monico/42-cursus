@@ -6,12 +6,12 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:12:28 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/06 17:00:58 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/08 16:06:25 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-//review situations longer and smaller than max int
+//review situations longer and smaller than max int. use strcmp, care for leading zeros
 t_node	*ft_parse_args(int argc, char **argv) 
 {
 	t_node *a_head;
@@ -38,6 +38,8 @@ int	ft_strvalid(char **str)
 		i = 0;
 		if (str[j][0] == '+' || str[j][0] == '-')
 			i++;
+		if (!ft_isdigit(str[j][i]))
+			return (0);
 		while (str[j][i])
 		{
 			if (!ft_isdigit(str[j][i]))
