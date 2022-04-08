@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:57:03 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/06 17:09:58 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/07 21:16:23 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		ft_free(char **str);
 int		ft_isdigit(int c);
 void	ft_lstclear(t_node **lst);
 t_node	*ft_parse_args(int argc, char **argv);
-void	ft_printlist(t_stack *stack);
+void	ft_printlist(t_stack *astk, t_stack *bstk);
 void	ft_putchar(char c);
 void	ft_putnbr(int n);
 void	ft_putstr(char *s);
@@ -67,6 +67,8 @@ void	ft_push(t_stack *stack, t_stack *stackaux);
 void	ft_rev_rotation(t_stack *stack);
 void	ft_rotation(t_stack *stack);
 void	ft_swap(t_node *node);
-
+void	ft_sa(t_stack *a_stack);
+void	ft_sb(t_stack *b_stack);
+void	ft_ss(t_stack *a_stack, t_stack *b_stack);
 
 #endif

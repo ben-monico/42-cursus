@@ -1,25 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_sec_operations.c                                 :+:      :+:    :+:   */
+/*   f_operations_a.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/01 18:27:14 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/05 00:20:30 by benmonico        ###   ########.fr       */
+/*   Created: 2022/03/31 18:41:14 by bcarreir          #+#    #+#             */
+/*   Updated: 2022/04/07 21:06:21 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sa(t_stack *a_stack)
+void	ft_swap(t_node *node)
 {
-	t_node *a_head;
+	int	aux;
 
-	a_head = a_stack->head;
-	ft_swap(a_head);
+	if (!node || node->next == NULL)
+		return;
+	aux = node->nb;
+	node->nb = node->next->nb;
+	node->next->nb = aux;
+}
+void	ft_push(t_stack *stack, t_stack *stackaux)
+{
+
 }
 
+void	ft_rotation(t_stack *stack)
+{
+
+}
+
+void	ft_rev_rotation(t_stack *stack)
+{
+
+}
+
+void	ft_sa(t_stack *a_stack)
+{
+	ft_swap(a_stack->head);
+	ft_putstr("sa\n");
+}
+
+void	ft_sb(t_stack *b_stack)
+{
+	ft_swap(b_stack->head);
+	ft_putstr("sb\n");
+}
+
+void	ft_ss(t_stack *a_stack, t_stack *b_stack)
+{
+	ft_sa(a_stack);
+	ft_sb(b_stack);
+	ft_putstr("ss\n");
+}
 // sa (swap a): Swap the first 2 elements at the top of stack a.
 // Do nothing if there is only one or no elements.
 // sb (swap b): Swap the first 2 elements at the top of stack b.

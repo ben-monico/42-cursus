@@ -3,24 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   f_utils_list_b.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:05:28 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/06 17:11:08 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/07 21:22:00 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_printlist(t_stack *stack)
+void	ft_printlist(t_stack *astk, t_stack *bstk)
 {
-	t_node *ptr;
+	t_node *aptr;
+	t_node *bptr;
 
-	ptr = stack->head;
-	while (ptr != NULL)
+	aptr = astk->head;
+	bptr = bstk->head;
+	while (aptr)
 	{
-		ft_putnbr(ptr->nb);
+		ft_putnbr(aptr->nb);
+		write(1, "	", 1);
 		write(1, "\n", 1);
-		ptr = ptr->next;
+		aptr = aptr->next;
 	}
 }

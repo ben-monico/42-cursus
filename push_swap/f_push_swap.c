@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_push_swap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:10:26 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/06 19:21:09 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/07 21:14:43 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,17 @@ int	ft_checksort(t_stack *stack)
 	return (1);
 }
 
-void	ft_algorithm(t_stack *a_stack, t_stack *b_stack)
+void	ft_algorithm(t_stack *astk, t_stack *bstk)
 {
-	b_stack->size = 0;
-	if (ft_checksort(a_stack))
+	bstk->size = 0;
+	ft_printlist(astk, bstk);
+	if (ft_checksort(astk))
 	{
 		ft_putstr("Sorted baby\n");
 		return ;
 	}
+	ft_sa(astk);
+	ft_printlist(astk, bstk);
 }
 
 int main(int argc, char **argv)
@@ -53,6 +56,5 @@ int main(int argc, char **argv)
 		return (0);
 	}
 	ft_algorithm(ps.a, ps.b);
-	ft_printlist(ps.a);
  	// system("leaks -- a.out");
 }
