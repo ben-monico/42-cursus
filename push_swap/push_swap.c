@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:10:26 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/09 23:09:11 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/04/12 15:41:55 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 // list to array. index array. push to list when they are the next index
+
+// void	ft_sort(t_stack *astk, t_stack *bstk)
+// {
+
+// }
+
 void	ft_algorithm(t_stack *astk, t_stack *bstk)
 {
 	astk->tail = ft_find_tail(astk->head);
@@ -20,7 +26,7 @@ void	ft_algorithm(t_stack *astk, t_stack *bstk)
 	ft_putnbr(astk->size);
 	ft_putstr(" = ps.a size\n");
 	ft_setindex(astk);
-	
+	// ft_sort(astk, bstk);
 	return ;
 }
 

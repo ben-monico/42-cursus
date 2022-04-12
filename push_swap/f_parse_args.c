@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_parse_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:12:28 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/09 22:40:56 by benmonico        ###   ########.fr       */
+/*   Updated: 2022/04/12 14:29:19 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int	ft_parse_args(t_stack *a, int argc, char **argv) 
 {
 	a->head = ft_split_to_stack(argc, argv);
-	if (!a)
+	if (!a->head)
 		return (0);
 	if (ft_dup_check(a->head))
 	{
-		ft_lstclear(&a->head);
+		ft_lstclear(&a->head);   
 		return (0);
 	}
 	a->size = ft_lstsize(a->head);

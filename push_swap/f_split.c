@@ -6,7 +6,7 @@
 /*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:07:52 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/06 17:02:14 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/12 14:25:13 by bcarreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ t_node *ft_split_to_stack(int argc, char **argv)
 		str = ft_split(argv[i], ' ');
 		if (!str)
 			return (NULL);
-		if (!ft_strvalid(str) && ft_free(str))
+		if (!ft_strvalid(str))
+		{
+			ft_free(str);
 			return (NULL);
+		}
 		node = ft_atoiton(str);
 		if (!node)
 			return (NULL);
