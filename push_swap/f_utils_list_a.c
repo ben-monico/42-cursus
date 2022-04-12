@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_utils_list.c                                     :+:      :+:    :+:   */
+/*   f_utils_list_a.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 18:20:35 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/06 14:17:38 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/09 21:25:07 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_node *ft_initnode(int i)
 	if (!new)
 		return (NULL);
 	new->nb = i;
+	new->index = -1;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

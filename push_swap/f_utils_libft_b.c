@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_utils_libft_b.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 15:52:09 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/08 15:53:55 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/09 21:54:13 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,13 @@ int	ft_strcmp(const char *s1, const char *s2)
 	while (s1[i] && s2[i] && (s1[i] == s2[i]))
 		i++;
 	return ((unsigned char)s1[i] - s2[i]);
+}
+
+void	ft_swap_int(int *a, int *b)
+{
+	int	aux;
+
+	aux = *a;
+	*a = *b;
+	*b = aux;
 }

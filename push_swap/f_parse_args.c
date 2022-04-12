@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   f_parse_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:12:28 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/08 16:06:25 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/09 22:40:56 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 //review situations longer and smaller than max int. use strcmp, care for leading zeros
-t_node	*ft_parse_args(int argc, char **argv) 
+int	ft_parse_args(t_stack *a, int argc, char **argv) 
 {
-	t_node *a_head;
-
-	a_head = ft_split_to_stack(argc, argv);
-	if (!a_head)
-		return (NULL);
-	if (ft_dup_check(a_head))
+	a->head = ft_split_to_stack(argc, argv);
+	if (!a)
+		return (0);
+	if (ft_dup_check(a->head))
 	{
-		ft_lstclear(&a_head);
-		return (NULL);
+		ft_lstclear(&a->head);
+		return (0);
 	}
-	return (a_head);
+	a->size = ft_lstsize(a->head);
+	a->tail = ft_find_tail(a->head);
+	return (1);
 }
 
 int	ft_strvalid(char **str)

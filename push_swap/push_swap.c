@@ -3,51 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:10:26 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/08 16:13:02 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/09 23:09:11 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+// list to array. index array. push to list when they are the next index
 void	ft_algorithm(t_stack *astk, t_stack *bstk)
 {
 	astk->tail = ft_find_tail(astk->head);
-	ft_putstr("| Init stack a and b |\n");
+	ft_putstr("| Init stacks |\n");
 	ft_printlist(astk, bstk);
-	if (ft_checksort(astk))
-	{
-		ft_putstr("Sorted baby\n");
-		return ;
-	}
-	ft_sa(astk);
-	ft_printlist(astk, bstk);
-	ft_pb(astk, bstk);
-	ft_printlist(astk, bstk);
-	ft_ra(astk);
-	ft_printlist(astk, bstk);
-	ft_rra(astk);
-	ft_printlist(astk, bstk);
+	ft_putnbr(astk->size);
+	ft_putstr(" = ps.a size\n");
+	ft_setindex(astk);
+	
+	return ;
 }
 
 int main(int argc, char **argv)
 {
 	t_ps	ps;
 
-	if (!(ps.a = ft_initstack(0)) || !(ps.b = ft_initstack(0)))
+	if (argc == 1 || !(ps.a = ft_initstack(0)) || !(ps.b = ft_initstack(0)))
 	{
-		ft_putstr("Stack Error\n");
+		if (ps.a)
+			free(ps.a);
+		ft_putstr("Error\n");
 		return (0);
 	}	
-	if (argc == 1 || !(ps.a->head = ft_parse_args(argc, argv)))
+	if (!(ft_parse_args(ps.a, argc, argv)))
 	{
 		ft_putstr("Parsing Error\n");
 		free(ps.a);
 		free(ps.b);
 		return (0);
 	}
+	if (ft_checksort(ps.a) || !ps.a->head->next)
+		return (0);
 	ft_algorithm(ps.a, ps.b);
  	// system("leaks -- a.out");
 }

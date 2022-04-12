@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_operations_a.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcarreir <bcarreir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benmonico <benmonico@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:41:14 by bcarreir          #+#    #+#             */
-/*   Updated: 2022/04/08 16:44:52 by bcarreir         ###   ########.fr       */
+/*   Updated: 2022/04/09 00:43:27 by benmonico        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,16 @@ void	ft_swap(t_node *node)
 void	ft_push(t_stack *stack, t_stack *stackaux)
 {
 	t_node *aux;
-	if (!(stack->head) || stack->head->next == NULL)
+	if (!stack->head)
 		return;
 	aux = stack->head;
-	stack->head = stack->head->next;
-	stack->head->prev = NULL;
+	if (stack->head->next)
+	{
+		stack->head = stack->head->next;
+		stack->head->prev = NULL;
+	}
+	else
+		stack->head = NULL;
 	aux->next = stackaux->head;
 	stackaux->head = aux;
 	if (stackaux->head->next)
